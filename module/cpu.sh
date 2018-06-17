@@ -1,6 +1,5 @@
 name=cpu
 DATABASE=$DBDIR/$name.rrd
-IMG=$name.svg
 RRDTOOL=/usr/bin/rrdtool
 PERIOD=30
 TMP=`cat /proc/cpuinfo | grep "cpu MHz" | wc -l` #cpus 
@@ -36,10 +35,10 @@ function update_rrd {
 }
 
 function creat_img {
-	$RRDTOOL graph $IMGDIR/$1/$IMG \
+	$RRDTOOL graph $IMGDIR/$1/$name.$5 \
 		-s $2 \
 		-e now \
-		-a SVG \
+		-a ${5^^} \
 		-t "$(hostname) $name %" \
 		-r \
 		-E \

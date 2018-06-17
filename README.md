@@ -13,5 +13,5 @@ rm master.zip
 #### Added crontab
 ```bash
 * * * * * cd /root/monitor-resource-master && ./main.sh
-0 0 * * * cd /root/monitor-resource-master && ./main.sh report 1day
+0 0 * * * cd /root/monitor-resource-master && ./main.sh report 1day dima-bannik@mail.ru > /dev/null 2>&1
 ```

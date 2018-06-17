@@ -1,6 +1,5 @@
 name=eno1
 DATABASE=$DBDIR/$name.rrd
-IMG=$name.svg
 RRDTOOL=/usr/bin/rrdtool
 PERIOD=30
 IF=$name
@@ -44,10 +43,10 @@ function update_rrd {
 
 function creat_img {
 	mkdir -p $IMGDIR/$1/$name/
-	$RRDTOOL graph $IMGDIR/$1/$name/pps-$IMG \
+	$RRDTOOL graph $IMGDIR/$1/$name/pps-$name.$5 \
 		-s $2 \
 		-e now \
-		-a SVG \
+		-a ${5^^} \
 		-t "$(hostname) $IF pps" \
 		-r \
 		-E \
@@ -101,10 +100,10 @@ function creat_img {
 		GPRINT:mvar5:MAX:'%4.3lf' \
 		GPRINT:mvar6:MAX:'%4.3lf\r' \
 		
-	$RRDTOOL graph $IMGDIR/$1/$name/byte-$IMG \
+	$RRDTOOL graph $IMGDIR/$1/$name/byte-$name.$5 \
 		-s $2 \
 		-e now \
-		-a SVG \
+		-a ${5^^} \
 		-t "$(hostname) $IF byte/s" \
 		-r \
 		-E \

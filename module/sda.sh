@@ -1,6 +1,5 @@
 name=sda
 DATABASE=$DBDIR/$name.rrd
-IMG=$name.svg
 RRDTOOL=/usr/bin/rrdtool
 PERIOD=30
 
@@ -34,10 +33,10 @@ function update_rrd {
 
 function creat_img {
 	mkdir -p $IMGDIR/$1/$name/
-	$RRDTOOL graph $IMGDIR/$1/$name/byte-$IMG \
+	$RRDTOOL graph $IMGDIR/$1/$name/byte-$name.$5 \
 		-s $2 \
 		-e now \
-		-a SVG \
+		-a ${5^^} \
 		-t "$(hostname) $name byte/s" \
 		-r \
 		-E \
@@ -63,10 +62,10 @@ function creat_img {
 		GPRINT:mvar1:MAX:'%6.0lf %sB/s' \
 		GPRINT:mvar2:MAX:'%6.0lf %sB/s\r'
 		
-	$RRDTOOL graph $IMGDIR/$1/$name/count-$IMG \
+	$RRDTOOL graph $IMGDIR/$1/$name/count-$name.$5 \
 		-s $2 \
 		-e now \
-		-a SVG \
+		-a ${5^^} \
 		-t "$(hostname) $name iops" \
 		-r \
 		-E \

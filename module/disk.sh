@@ -1,7 +1,6 @@
 name=disk
 DIR=$(echo $name/ | sed -e 's/^disk//' -e 's/-/\//g')
 DATABASE=$DBDIR/$name.rrd
-IMG=$name.svg
 RRDTOOL=/usr/bin/rrdtool
 PERIOD=30
 
@@ -29,10 +28,10 @@ function update_rrd {
 
 function creat_img {
 	mkdir -p $IMGDIR/$1/
-	$RRDTOOL graph $IMGDIR/$1/$IMG \
+	$RRDTOOL graph $IMGDIR/$1/$name.$5 \
 		-s $2 \
 		-e now \
-		-a SVG \
+		-a ${5^^} \
 		-t "$(hostname) - disk space $DIR" \
 		-r \
 		-E \

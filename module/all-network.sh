@@ -53,12 +53,12 @@ function creat_img {
 
 	for IF in $IFSNETWORKING; do
 		DATABASE=$DBDIR/$IF.rrd
-		IMG=$IF.svg
+		IMG=$IF.$5
 		mkdir -p $IMGDIR/$1/$IF/
 		$RRDTOOL graph $IMGDIR/$1/$IF/pps-$IMG \
 			-s $2 \
 			-e now \
-			-a SVG \
+			-a ${5^^} \
 			-t "$(hostname) $IF pps" \
 			-r \
 			-E \
@@ -115,7 +115,7 @@ function creat_img {
 		$RRDTOOL graph $IMGDIR/$1/$IF/byte-$IMG \
 			-s $2 \
 			-e now \
-			-a SVG \
+			-a ${5^^} \
 			-t "$(hostname) $IF byte/s" \
 			-r \
 			-E \
